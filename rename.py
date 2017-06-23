@@ -26,15 +26,9 @@ def main():
         epCount = len(glob.glob1(path, splitName + '*' + ext)) # Get the number of episode exist
        	epCount += 1 # Total episod exist + 1 = Episode for the current file
        	fileNameNew =  splitName + str(epCount) + '_' + TITLE.split('_')[2] + ext
-
-       	# Check if the first episode exist
-        if os.path.isfile(os.path.join(splitName + '1' + '_' + TITLE.split('_')[2] + ext)):
-        	os.rename(os.path.join(path, fileName + ext), os.path.join(path, fileNameNew))
-        	logging.info("Rename file success from "  + fileName + ext  + " to " + fileNameNew)
-        # Only executed if only one file in the folder
-        elif epCount == 1:
-        	os.rename(os.path.join(path, fileName + ext), os.path.join(path, splitName + '1_' + TITLE.split('_')[2] + ext))
-        	logging.info("Rename file success from "  + fileName + ext  + " to " + fileNameNew)
+        # Rename the file
+        os.rename(os.path.join(path, fileName + ext), os.path.join(path, fileNameNew))
+        logging.info("Rename file success from "  + fileName + ext  + " to " + fileNameNew)
 
     except:
         print("Error during renaming " + fileName + ext)
