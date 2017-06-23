@@ -5,7 +5,7 @@ import ntpath
 import logging
 
 # Change this to any style
-# If you change the naming structure don't forget to change line 25 "_".join(TITLE.split("_")[:2]) 
+# If you change the naming structure don't forget to change line splitName = "_".join(TITLE.split("_")[:2])
 TITLE = "DBS_ep_720p"
 
 def main():
