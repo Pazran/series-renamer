@@ -8,7 +8,7 @@ I download Dragon Ball Super and put it in folder but ever damn time the name fo
 
 **Details**
 
-This script using the batch functionality and send to in windows inspired by [subtitle-downloader](manojmj92/subtitle-downloader).
+This script using the batch functionality and send to in windows inspired by [subtitle-downloader](https://github.com/manojmj92/subtitle-downloader).
 If anyone want to use this for other series you have to change the title in the *renamer.py* and few lines (read the comments in the file)
 
 How to make it work:
