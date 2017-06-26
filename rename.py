@@ -1,14 +1,50 @@
 import os
+import re
 import sys
-import glob
-import ntpath
 import logging
+import tvdb_api
 
-# Change this to any style
-# If you change the naming structure don't forget to change line splitName = "_".join(TITLE.split("_")[:2])
-TITLE = "DBS_ep_720p"
+TITLE = "Hunter x Hunter (2011)"
+SEASON = 1
+NAME_FORMAT = 'HxH'
+
+def getInfo(fpath):
+    
+    try:
+        t = tvdb_api.Tvdb()
+        root, ext = os.path.splitext(fpath)
+        consPath, consDir, consFile = next(os.walk(os.path.dirname(fpath)))
+        pattern = ["(-+)(\d+)(-+)","(-+|\s|_+)(ep\d+|EP\d+|\d+)(-+|\s|_+)"] # AnimeHeaven files name pattern
+
+        for pt in pattern:
+            result = re.search(pt,fpath)
+            if result:
+                rawEp = (result.group()).lower()         
+                ep = rawEp.replace('-','').replace('_','').replace('ep','').replace('-','')
+
+        if ext not in [".avi", ".mp4", ".mkv", ".mpg", ".mpeg", ".mov", ".rm", ".vob", ".wmv", ".flv", ".3gp",".3g2"]:
+            return
+        
+        if result or result2:
+            print(ep)
+            info = t[TITLE][SEASON][int(ep)]
+            epName = info['episodename'].replace('?','').replace('!','')
+            newFileName = NAME_FORMAT + " " +str("{0:0=3d}".format(int(ep))) + ' - ' + epName + ext
+
+            if (fpath != os.path.join(consPath, newFileName)):
+                os.rename(fpath, os.path.join(consPath, newFileName))
+                logging.info("Rename file success from " + fpath + " to " + consPath + newFileName)
+
+        else:
+            return
+
+    except:
+        print("Error during renaming " + fpath)
+        print("Error", sys.exc_info())
+        logging.error("Error during renaming " + fpath + str(sys.exc_info()))
 
 def main():
+
     root, ext = os.path.splitext(sys.argv[0])
     logging.basicConfig(filename=root + '.log', level=logging.INFO)
     logging.info("Started with parameter " + str(sys.argv))
@@ -17,23 +53,14 @@ def main():
         print("This program require one parameter!")
         sys.exit(1)
 
-    try:
-        root, ext = os.path.splitext(sys.argv[1])
-        fileName = ntpath.basename(root)
-        path, dirs, files = next(os.walk(os.path.dirname(sys.argv[1])))
-        splitName = "_".join(TITLE.split("_")[:2])
-        ep = len(glob.glob1(path, '*' + ext))
-        epCount = len(glob.glob1(path, splitName + '*' + ext)) # Get the number of episode exist
-       	epCount += 1 # Total episod exist + 1 = Episode for the current file
-       	fileNameNew =  splitName + str(epCount) + '_' + TITLE.split('_')[2] + ext
-        # Rename the file
-        os.rename(os.path.join(path, fileName + ext), os.path.join(path, fileNameNew))
-        logging.info("Rename file success from "  + fileName + ext  + " to " + fileNameNew)
-
-    except:
-        print("Error during renaming " + fileName + ext)
-        print("Error", sys.exc_info())
-        logging.error("Error during renaming " + fileName + str(sys.exc_info()))
+    for path in sys.argv[1:]:
+        if os.path.isdir(path):
+            for dirPath, subDir, files, in os.walk(path):
+                for file in files:
+                    filePath = os.path.join(dirPath, file)
+                    getInfo(filePath)
+        else:
+            getInfo(path)
 
 if __name__  == "__main__":
     main()
