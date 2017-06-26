@@ -18,9 +18,12 @@ Current pattern that the script detect:
 - name with pattern like {anysymbols}XXX{anysymbols} ex: "--001--"(mostly from animeheaven)
 
 Example:
+
 TITLE = 'Hunter x Hunter (2011)'
+
 SEASON = 1
-NAME_FORMAT 'HxH'
+
+NAME_FORMAT = 'HxH'
 
 Old file name "Hunter-x-Hunter-1-720p.mp4"
 
