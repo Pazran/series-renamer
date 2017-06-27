@@ -28,7 +28,7 @@ So "Hunter-x-Hunter-1-720p.mp4" --> "HxH 001 - Departure x And x Friends.mp4"
 How to make it work:
 - Open exploere.exe type *shell:sendto*
 - Copy and past the *renamer.cmd* here
-- Put *renamer.py* in *D:\\*
+- Put *renamer.py* in *C:\\*
 
 Now just right click the file > Send To > renamer.cmd (*Note: do it in order from episode 1 to final episode*)
 You can also select multiple files.
