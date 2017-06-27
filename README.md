@@ -9,6 +9,7 @@ I have too many series especially anime with crappy naming scheme. So i decided 
 ## Details
 
 This script using the batch functionality and *send to* in windows inspired by [subtitle-downloader](https://github.com/manojmj92/subtitle-downloader).
+
 If anyone want to use this for other series you have to change the TITLE, SEASON, NAME_FORMAT in the *renamer.py*
 
 Current pattern that the script detect:
@@ -17,13 +18,18 @@ Current pattern that the script detect:
 - name with pattern like {anysymbols}XXX{anysymbols} ex: "--001--"(mostly from animeheaven)
 
 Example:
+
 TITLE = 'Hunter x Hunter (2011)'
+
 SEASON = 1
-NAME_FORMAT 'HxH'
+
+NAME_FORMAT = 'HxH'
 
 Old file name "Hunter-x-Hunter-1-720p.mp4"
+
 New file name will be NAME_FORMAT + (episode) + episodename
-So "Hunter-x-Hunter-1-720p.mp4" --> "HxH 001 - Departure x And x Friends.mp4"
+
+So *"Hunter-x-Hunter-1-720p.mp4"* --> *"HxH 001 - Departure x And x Friends.mp4"*
 
 How to make it work:
 - Open exploere.exe type *shell:sendto*
@@ -36,4 +42,5 @@ You can also select multiple files.
 ## Notes
 
 If the file name do not have the episode it will not be rename. Obviously internet connection required to fetch the series informations.
+
 If anyone have better suggestion feel free to edit.
